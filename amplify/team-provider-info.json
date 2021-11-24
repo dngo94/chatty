@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-chatty-staging-182202-authRole",
+      "UnauthRoleArn": "arn:aws:iam::635005782375:role/amplify-chatty-staging-182202-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::635005782375:role/amplify-chatty-staging-182202-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-chatty-staging-182202-deployment",
+      "UnauthRoleName": "amplify-chatty-staging-182202-unauthRole",
+      "StackName": "amplify-chatty-staging-182202",
+      "StackId": "arn:aws:cloudformation:us-west-1:635005782375:stack/amplify-chatty-staging-182202/6bf97e60-4d53-11ec-b5c4-02b62e58842d",
+      "AmplifyAppId": "d2n7j4q40c4oht"
+    },
+    "categories": {
+      "auth": {
+        "chatty": {}
+      }
+    }
+  }
+}

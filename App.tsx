@@ -8,8 +8,8 @@ import Navigation from './navigation';
 
 import Amplify from '@aws-amplify/core';
 import Auth from '@aws-amplify/auth';
-// import config from './src/aws-exports';
-// Amplify.configure(config);
+import config from './src/aws-exports';
+Amplify.configure(config);
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -48,9 +48,9 @@ export default function App() {
 //   },
 // });
 
-// Amplify.configure({
-//   ...config,
-//   Analytics: { 
-//     disabled: true
-//   }
-// });
+Amplify.configure({
+  ...config,
+  Analytics: { 
+    disabled: true
+  }
+});
