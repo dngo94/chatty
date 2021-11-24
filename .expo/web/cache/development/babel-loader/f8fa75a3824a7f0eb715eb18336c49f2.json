@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from \"./MessageInput\";","map":{"version":3,"sources":["/Users/daisyngo/Desktop/Github/chatty/components/MessageInput/index.ts"],"names":["default"],"mappings":"AAAA,SAAQA,OAAR","sourcesContent":["export {default} from './MessageInput';"]},"metadata":{},"sourceType":"module"}
