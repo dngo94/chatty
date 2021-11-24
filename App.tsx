@@ -11,7 +11,8 @@ import Auth from '@aws-amplify/auth';
 import config from './src/aws-exports';
 Amplify.configure(config);
 
-export default function App() {
+// export default 
+function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
@@ -29,7 +30,7 @@ export default function App() {
   }
 }
 
-// export default withAuthenticator(App);
+export default withAuthenticator(App);
 
 // Amplify.configure({
 //   Auth: {
