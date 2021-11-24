@@ -14,14 +14,13 @@
  import useColorScheme from '../hooks/useColorScheme';
  import ModalScreen from '../screens/ModalScreen';
  import NotFoundScreen from '../screens/NotFoundScreen';
- import Homecreen from '../screens/HomeScreen';
  import ChatRoomScreen from '../screens/ChatRoomScreen';
  import TabTwoScreen from '../screens/TabTwoScreen';
  import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
  import { MaterialCommunityIcons, Feather, Entypo } from '@expo/vector-icons'; 
  import LinkingConfiguration from './LinkingConfiguration';
  import HomeScreen from '../screens/HomeScreen';
-// import UsersScreen from '../screens/UsersScreen';
+import UsersScreen from '../screens/UsersScreen';
  
  export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
    return (
@@ -47,7 +46,7 @@
          options={{ headerTitle: HomeHeader}} 
        />
        <Stack.Screen name="ChatRoom" component={ChatRoomScreen} options={{ headerTitle: ChatRoomHeader }} />
-       {/* <Stack.Screen name="UsersScreen" component={UsersScreen} options={{ title: 'Contacts'}} /> */}
+       <Stack.Screen name="UsersScreen" component={UsersScreen} options={{ title: 'Contacts'}} />
        <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
        <Stack.Group screenOptions={{ presentation: 'modal' }}>
          <Stack.Screen name="Modal" component={ModalScreen} />
@@ -77,9 +76,9 @@
        />
        </Pressable>
        <Text style={{flex: 1, textAlign: 'center', marginLeft: 50, fontWeight: 'bold', }}>Chatty</Text>
-       {/* <Pressable onPress={() => navigation.navigate('UsersScreen')}> */}
+       <Pressable onPress={() => navigation.navigate('UsersScreen')}>
           <Entypo name="new-message" size={24} color="#3777f0" style= {{marginHorizontal: 20}}/>
-       {/* </Pressable> */}
+       </Pressable>
      </View>
    )
  }

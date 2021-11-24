@@ -9,11 +9,18 @@
       "UnauthRoleName": "amplify-chatty-staging-182202-unauthRole",
       "StackName": "amplify-chatty-staging-182202",
       "StackId": "arn:aws:cloudformation:us-west-1:635005782375:stack/amplify-chatty-staging-182202/6bf97e60-4d53-11ec-b5c4-02b62e58842d",
-      "AmplifyAppId": "d2n7j4q40c4oht"
+      "AmplifyAppId": "d2n7j4q40c4oht",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-chatty-staging-182202-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
         "chatty": {}
+      },
+      "function": {
+        "chattyPostConfirmation": {
+          "deploymentBucketName": "amplify-chatty-staging-182202-deployment",
+          "s3Key": "amplify-builds/chattyPostConfirmation-6f642f69392b32387634-build.zip"
+        }
       }
     }
   }
