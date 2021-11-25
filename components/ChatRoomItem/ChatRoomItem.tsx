@@ -1,34 +1,55 @@
-import React from 'react';
-import {Text, Image, View, StyleSheet, TouchableOpacity, Pressable} from 'react-native';
-import styles from './styles';
-import { useNavigation } from '@react-navigation/core';
-import { useRoute } from '@react-navigation/native';
+import React, { useState, useEffect } from "react";
+import { Text, Image, View, Pressable, ActivityIndicator } from "react-native";
+import { useNavigation } from "@react-navigation/core";
+import { DataStore } from "@aws-amplify/datastore";
+import {User, Message, ChatRoom } from "../../src/models";
+import styles from "./styles";
+import Auth from "@aws-amplify/auth";
+// import moment from "moment";
 
-export default function ChatRoomItem({chatRoom} : {chatRoom:any}){
-  
-  const user = chatRoom.users[1];
+export default function ChatRoomItem({ chatRoom }) {
+  const [users, setUsers] = useState<User[]>([]); // all users in this chatroom
+  // const [users, setUsers] = useState<User | null>(null); // the display user
+  const [lastMessage, setLastMessage] = useState<Message | undefined>();
+  const [isLoading, setIsLoading] = useState(true);
+
   const navigation = useNavigation();
 
-  const onPress = () => {
-    navigation.navigate('ChatRoom', {id: chatRoom.id});
-  }
+  useEffect(() => {
+    // const fetchUsers = async () => {
+    //   const fetchedUsers = (await DataStore.query(User))
+    //     .filter(user=> user.chatroomID === chatRoom.id)
+    //     .map(chatRoomUser => chatRoomUser.user);
+    //   const authUser = await Auth.currentAuthenticatedUser();
+    //   setUsers(fetchedUsers.find(user => user.id !== authUser.attributes.sub) || null);
+    // };
+    // fetchUsers();
+    DataStore.query(User).then(setUsers);
+    console.log(users);
 
-  return(
-    <Pressable onPress={onPress} style= {styles.container}>
-      <Image source={{uri: user.imageUri }} style={styles.image} />  
-      {chatRoom.newMessages && <View style={styles.badgeContainer}>
-      <Text style={styles.badgeText}>{chatRoom.newMessages}</Text>
-    </View>}
+  }, []);
+  useEffect(() => {
+    if (!chatRoom.chatRoomLastMessageId) { return }
+    DataStore.query(Message, chatRoom.chatRoomLastMessageId).then(setLastMessage);
+  }, [])
 
-    <View style = {styles.rightContainer}>
-      <View style={styles.row}>
-        <Text  style={styles.name}> {user.name}</Text>
-        <Text  style={styles.text}> {chatRoom.lastMessage.createdAt} </Text> 
+
+  return (  
+    <View style={styles.container}>
+      <Image
+        source={{ uri: users[1].imageUri }}
+        style={styles.image}
+      />
+      <View style={styles.badgeContainer}>
+        <Text style={styles.badgeText}>{chatRoom.newMessages}</Text>
       </View>
-      <Text numberOfLines={1} style={styles.text}>{chatRoom.lastMessage.content} </Text> 
+      <View style={styles.rightContainer}>
+        <View style={styles.row}>
+        <Text style={styles.name}>{users[1].name}</Text>
+          <Text style={styles.text}>{lastMessage?.createdAt}</Text>
+        </View>
+        <Text numberOfLines={1} style={styles.text}>{lastMessage?.content}</Text>
+      </View>
     </View>
-    </Pressable>
-);
-
+  );
 }
-

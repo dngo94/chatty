@@ -1,16 +1,34 @@
 import * as React from 'react';
-import {Text ,View, Image, StyleSheet,FlatList} from 'react-native';
+import { useEffect, useState } from 'react';
+import {Image, StyleSheet,FlatList} from 'react-native';
+import { Text, View } from '../components/Themed';
+import { DataStore, Auth } from 'aws-amplify';
+import { ChatRoom, User} from '../src/models';
 import ChatRoomItem from '../components/ChatRoomItem';
-import chatRoomsData from '../assets/dummy-data/ChatRooms';
-
-const chatRoom1 = chatRoomsData[0];
-const chatRoom2 = chatRoomsData[1];
 
 export default function HomeScreen(){
+
+   const [chatRooms, setChatRooms] = useState<ChatRoom[]>([]);
+   useEffect(() => {
+      const fetchChatRooms = async () => {
+         const chatRooms = (await DataStore.query(ChatRoom, c => c.newMessages("gt", 0 )));
+         // const chatRooms = (await DataStore.query(ChatRoom));
+
+         setChatRooms(chatRooms);
+
+      // const chatRooms = (await DataStore.query(ChatRoom))
+      //   .filter(
+      //     (user) => authUser.ChatRoomUsers === authUser.attributes.sub
+      //   )
+      //   .map((chatRoomUser) => chatRoomUser.chatroom);
+   };
+   fetchChatRooms();
+   }, []);
+
    return(
       <View style={styles.page}>
       <FlatList 
-      data={chatRoomsData}
+      data={chatRooms}
       renderItem={({item}) => <ChatRoomItem chatRoom={item}/>}
       showsVerticalScrollIndicator={false}
       />
